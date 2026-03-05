@@ -6,7 +6,6 @@
     'apparel.html': '/apparel',
     'ventura-punk-record-store-online.html': '/ventura-punk-record-store-online',
     '805-punk-bands.html': '/805-punk-bands',
-    '805-punk-shows-events.html': '/805-punk-shows-events',
     'about-poison-well-records.html': '/about-poison-well-records',
     'contact-wholesale.html': '/contact-wholesale',
     'faq.html': '/faq',
@@ -25,9 +24,116 @@
     return baseUrl + path;
   }
 
+  function normalizePath(pathname) {
+    let path = pathname || '/';
+    if (!path.startsWith('/')) path = '/' + path;
+    if (path.length > 1 && path.endsWith('/')) path = path.slice(0, -1);
+    if (path.endsWith('.html')) path = path.slice(0, -5);
+    return path || '/';
+  }
+
+  function markCurrentNavLink() {
+    const currentPath = normalizePath(window.location.pathname);
+    const navLinks = document.querySelectorAll('header nav a[href]');
+    navLinks.forEach(function (link) {
+      const href = link.getAttribute('href') || '';
+      if (!href || href.startsWith('#') || href.indexOf('mailto:') === 0 || href.indexOf('http') === 0) return;
+      const hrefPath = normalizePath(href.split('#')[0]);
+      if (hrefPath === currentPath) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  function ensureAlertBar() {
+    const header = document.querySelector('.site-header, .topbar, header');
+    if (!header) return;
+    const releaseAnnouncement = document.body.getAttribute('data-release-announcement') || 'Dr. Know - Live CBGB 1989';
+    const alertMarkup =
+      '<div class="alert-marquee">' +
+      '<span>NEW RELEASE ANNOUNCEMENT: <strong>' + releaseAnnouncement + '</strong> is live now. <a href="/dr-know-live-cbgb-1989-ventura-hardcore">VIEW &amp; BUY -></a></span>' +
+      '</div>';
+
+    const existing = document.querySelector('.alert-bar, .header-alert');
+    if (existing) {
+      existing.className = 'alert-bar';
+      existing.setAttribute('role', 'region');
+      existing.setAttribute('aria-label', 'Limited pressing alert');
+      existing.innerHTML = alertMarkup;
+      return;
+    }
+
+    const alertBar = document.createElement('div');
+    alertBar.className = 'alert-bar';
+    alertBar.setAttribute('role', 'region');
+    alertBar.setAttribute('aria-label', 'Limited pressing alert');
+    alertBar.innerHTML = alertMarkup;
+    header.insertAdjacentElement('afterend', alertBar);
+  }
+
+  function ensureVinylBackground() {
+    let spinner = document.querySelector('.vinyl-bg-spinner');
+    if (!spinner) {
+      spinner = document.createElement('div');
+      spinner.className = 'vinyl-bg-spinner';
+      spinner.setAttribute('aria-hidden', 'true');
+      document.body.insertAdjacentElement('afterbegin', spinner);
+    }
+
+    let labelEl = document.querySelector('.vinyl-band-label');
+    if (!labelEl) {
+      labelEl = document.createElement('span');
+      labelEl.className = 'vinyl-band-label';
+      labelEl.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(labelEl);
+    }
+
+    const bandLabels = {
+      '/': { band: 'Dr. Know', color: '#e85c0d', label: 'CBGB 1989' },
+      '/ventura-punk-record-store-online': { band: 'RAW', color: '#f5a623', label: 'Sick Love' },
+      '/apparel': { band: 'Poison Well', color: '#cc2200', label: '805 Merch' },
+      '/805-punk-bands': { band: 'I Decline', color: '#b5651d', label: 'SoCal HC' },
+      '/about-poison-well-records': { band: 'Narthex', color: '#8b4513', label: '1984' },
+      '/contact-wholesale': { band: 'Front Street', color: '#d2691e', label: 'Knuckle Draggers' },
+      '/faq': { band: 'Los Bonedrivers', color: '#cd853f', label: 'Distro' },
+      '/dr-know-live-cbgb-1989-ventura-hardcore': { band: 'Dr. Know', color: '#ff4500', label: 'Live CBGB' }
+    };
+
+    const currentPath = normalizePath(window.location.pathname);
+    const data = bandLabels[currentPath] || bandLabels['/'];
+    spinner.style.setProperty('--label-color', data.color);
+    spinner.setAttribute('data-band', data.band);
+    spinner.setAttribute('title', data.band + ' - ' + data.label);
+    labelEl.textContent = data.band.toUpperCase();
+    labelEl.style.color = data.color;
+
+    const randomOffset = Math.floor(Math.random() * 20) - 10;
+    spinner.style.top = (14 + randomOffset) + 'vh';
+    spinner.style.right = (-90 + randomOffset) + 'px';
+    labelEl.style.top = 'calc(' + (14 + randomOffset) + 'vh + 420px)';
+  }
+
+  function initVinylScrollBoost() {
+    let timer = null;
+    window.addEventListener('scroll', function () {
+      document.body.classList.add('vinyl-scrolling');
+      if (timer) window.clearTimeout(timer);
+      timer = window.setTimeout(function () {
+        document.body.classList.remove('vinyl-scrolling');
+      }, 160);
+    }, { passive: true });
+  }
+
   const yearNodes = document.querySelectorAll('[data-current-year]');
   const y = new Date().getFullYear();
   yearNodes.forEach(function (n) { n.textContent = String(y); });
+
+  markCurrentNavLink();
+  ensureAlertBar();
+  ensureVinylBackground();
+  initVinylScrollBoost();
 
   const canonicalNode = document.querySelector('link[rel="canonical"]');
   if (!canonicalNode) {
@@ -67,9 +173,12 @@
         addressCountry: 'US'
       },
       sameAs: [
+        'https://www.tiktok.com/@poisonwellrecords',
         'https://www.instagram.com/poisonwellrecords',
-        'https://www.youtube.com/@poisonwellrecords',
-        'https://www.x.com/PoisonWellRcrds'
+        'https://www.discogs.com/user/PoisonWellRecords',
+        'https://poisonwellrecords.bandcamp.com/dashboard',
+        'https://www.facebook.com/poisonwellrecords/',
+        'https://www.youtube.com/@poisonwellrecords'
       ]
     });
     document.head.appendChild(org);
@@ -111,7 +220,7 @@
       '/apparel': 'Apparel',
       '/ventura-punk-record-store-online': 'Vinyl',
       '/805-punk-bands': 'Artists & 805 Archive',
-      '/805-punk-shows-events': 'Shows & Events',
+
       '/about-poison-well-records': 'About',
       '/contact-wholesale': 'Contact / Wholesale',
       '/faq': 'FAQ',
@@ -208,23 +317,111 @@
     });
   }
   // Run on DOM ready
+  function initLatestRelease() {
+    const target = document.getElementById('latest-release-cards');
+    if (!target) return;
+    // prefer the first release card inside the releases grid
+    const first = document.querySelector('.release-grid .release-card') || document.querySelector('.release-card');
+    if (!first) return;
+    const clone = first.cloneNode(true);
+    // Tweak clone: remove duplicate buy links and adjust copy for 'Latest Release'
+    const links = clone.querySelectorAll('.release-links a');
+    if (links && links.length > 1) {
+      // keep only the first (View Release) and the first Buy-like link if present
+      let kept = [];
+      // keep first link (assumed "View Release")
+      kept.push(links[0]);
+      // find a buy link by text that contains 'Buy' or 'Buy Vinyl' or 'Buy Now'
+      for (let i = 1; i < links.length; i++) {
+        const t = (links[i].textContent || '').toLowerCase();
+        if (t.indexOf('buy') !== -1) { kept.push(links[i]); break; }
+      }
+      // remove all link nodes and re-append the kept ones
+      const parent = links[0].parentNode;
+      parent.innerHTML = '';
+      kept.forEach(function (lnk) { parent.appendChild(lnk); });
+    }
+    // Adjust release-hook copy to highlight newest drop
+    const hook = clone.querySelector('.release-hook');
+    if (hook) {
+      if (!hook.textContent.toLowerCase().includes('new')) {
+        hook.textContent = 'Newest drop — ' + hook.textContent.trim();
+      }
+    }
+    // Remove any duplicate buy buttons elsewhere inside the clone
+    const buyButtons = clone.querySelectorAll('.buy-btn');
+    if (buyButtons && buyButtons.length > 1) {
+      for (let i = 1; i < buyButtons.length; i++) buyButtons[i].remove();
+    }
+    // Add a CTA link to the cloned card that opens an email prefilled with the release title
+    const titleNode = clone.querySelector('h3');
+    const releaseTitle = titleNode ? titleNode.textContent.trim() : 'Poison Well Records release';
+    const cta = document.createElement('a');
+    cta.className = 'btn primary';
+    cta.href = 'mailto:poisonwellrecords@gmail.com?subject=' + encodeURIComponent('Interested in buying: ' + releaseTitle);
+    cta.textContent = 'Contact to Buy';
+    // append CTA into release-links if present, otherwise to clone
+    const relLinks = clone.querySelector('.release-links');
+    if (relLinks) {
+      const wrapper = document.createElement('div');
+      wrapper.style.marginTop = '0.6rem';
+      wrapper.appendChild(cta);
+      relLinks.parentNode.insertBefore(wrapper, relLinks.nextSibling);
+    } else {
+      clone.appendChild(cta);
+    }
+    target.appendChild(clone);
+  }
+
+  // Add 'Contact to Buy' CTA to all existing release cards on the page
+  function initReleaseCTAs() {
+    const cards = document.querySelectorAll('.release-card');
+    if (!cards || cards.length === 0) return;
+    cards.forEach(function (card) {
+      if (card.__ctaAdded) return;
+      const titleNode = card.querySelector('h3');
+      const releaseTitle = titleNode ? titleNode.textContent.trim() : 'Poison Well Records release';
+      const existing = card.querySelector('a[href^="mailto:"]');
+      if (existing) { card.__ctaAdded = true; return; }
+      const cta = document.createElement('a');
+      cta.className = 'btn';
+      cta.href = 'mailto:poisonwellrecords@gmail.com?subject=' + encodeURIComponent('Interested in buying: ' + releaseTitle);
+      cta.textContent = 'Contact to Buy';
+      // place CTA after release-links if present, otherwise append at end
+      const relLinks = card.querySelector('.release-links');
+      if (relLinks) {
+        const wrapper = document.createElement('div');
+        wrapper.style.marginTop = '0.6rem';
+        wrapper.appendChild(cta);
+        relLinks.parentNode.insertBefore(wrapper, relLinks.nextSibling);
+      } else {
+        card.appendChild(cta);
+      }
+      card.__ctaAdded = true;
+    });
+  }
+
+  // Run on DOM ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApparelUI);
+    document.addEventListener('DOMContentLoaded', function () { initApparelUI(); initLatestRelease(); });
   } else {
     initApparelUI();
+    initLatestRelease();
   }
 
   const gate = document.getElementById('splash-gate');
   const logoDoor = document.getElementById('logo-door');
   if (gate && logoDoor) {
+    document.body.classList.add('gate-active');
     const openGate = function () {
       if (gate.classList.contains('open')) return;
       gate.classList.add('open');
       window.setTimeout(function () {
         gate.classList.add('hide');
-      }, 850);
+        document.body.classList.remove('gate-active');
+      }, 950);
     };
-    window.setTimeout(openGate, 2200);
+    // Only open on click, not auto
     logoDoor.addEventListener('click', openGate);
     logoDoor.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') {

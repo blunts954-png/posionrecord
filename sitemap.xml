@@ -17,8 +17,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://poisonwellrecords.netlify.app/805-punk-shows-events</loc>
+    <loc>https://poisonwellrecords.netlify.app/apparel</loc>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://poisonwellrecords.netlify.app/805-punk-shows-events</loc>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://poisonwellrecords.netlify.app/about-poison-well-records</loc>
