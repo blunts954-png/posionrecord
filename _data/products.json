@@ -2,7 +2,7 @@
   "drKnowLiveCbgb1989": {
     "name": "Live CBGB 1989 - Dr. Know",
     "description": "Limited 12-inch archival pressing.",
-    "unitAmount": 4900,
+    "unitAmount": 4500,
     "imagePath": "/assets/dr-know-live-cbgb-1989-ventura-punk-vinyl.jpg",
     "inventoryType": "vinyl",
     "maxQuantity": 4
@@ -50,7 +50,7 @@
   "iDeclineFailureByDesign": {
     "name": "Failure By Design - I Decline",
     "description": "SoCal punk and hardcore release with biting pace and edge.",
-    "unitAmount": 8000,
+    "unitAmount": 2500,
     "imagePath": "/assets/i-decline-failure-by-design-socal-punk-vinyl.jpg",
     "inventoryType": "vinyl",
     "maxQuantity": 6
@@ -87,11 +87,11 @@
     "inventoryType": "rarity",
     "maxQuantity": 1
   },
-  "chaoticEvilEP": {
-    "name": "Chaotic Evil EP",
-    "description": "Digital release from the Poison Well archives.",
+  "allABlurSelfTitled": {
+    "name": "Self Titled - All a Blur",
+    "description": "Digital release from the Poison Well catalog.",
     "unitAmount": 1000,
-    "imagePath": "/assets/Chaotic Evil.jpg",
+    "imagePath": "/assets/allblur.png",
     "inventoryType": "digital",
     "maxQuantity": 1
   },

@@ -4,20 +4,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Poison Well Records - Ventura 805 Punk Vinyl & Label</title>
+  <title>Ventura 805 Punk Vinyl | Poison Well Records</title>
   <link rel="icon" type="image/png" href="assets/jamestown the pitts.png">
+  <link rel="canonical" href="https://poisonwellrecords.com/" />
   
   <!-- SEO & Social Graph -->
-  <meta name="description" content="Poison Well Records: Archival-grade punk label specializing in 805 and SoCal underground history. Direct procurement active.">
-  <meta property="og:title" content="Poison Well Records | THE ARCHIVE">
-  <meta property="og:description" content="Secure archival recovery and restoration of the 805 punk trajectory. Direct Stripe procurement available.">
-  <meta property="og:image" content="assets/slim-come-quick-denim-leather-and-chains-punk-vinyl.jpg">
+  <meta name="description" content="Ventura-based 805 & SoCal punk vinyl label and shop. Featured releases, archive pressings, worldwide shipping. Browse vinyl, rarities, and the Digital Music Hub.">
+  <meta property="og:title" content="Ventura 805 Punk Vinyl | Poison Well Records">
+  <meta property="og:description" content="Independent label and online shop for 805 & SoCal punk. Featured vinyl, archive releases, and secure checkout.">
+  <meta property="og:image" content="https://poisonwellrecords.com/assets/slim-come-quick-denim-leather-and-chains-punk-vinyl.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Poison Well Records | Ground Zero">
-  <meta name="twitter:description" content="Direct archive access. 805/SoCal Punk Preservation.">
-  <meta name="twitter:image" content="assets/slim-come-quick-denim-leather-and-chains-punk-vinyl.jpg">
-  <meta property="og:url" content="https://poisonwellrecords.netlify.app/" />
+  <meta name="twitter:title" content="Ventura 805 Punk Vinyl | Poison Well Records">
+  <meta name="twitter:description" content="805 & SoCal punk vinyl label and shop. Featured releases, rarities, streaming hub, worldwide shipping.">
+  <meta name="twitter:image" content="https://poisonwellrecords.com/assets/slim-come-quick-denim-leather-and-chains-punk-vinyl.jpg">
+  <meta property="og:url" content="https://poisonwellrecords.com/" />
   <link rel="stylesheet" href="styles.css" />
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
@@ -35,10 +36,11 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://poisonwellrecords.com/#organization",
     "name": "Poison Well Records",
     "description": "Ventura 805 punk vinyl label and online store archiving SoCal punk rock",
-    "url": "https://poisonwellrecords.netlify.app",
-    "logo": "https://poisonwellrecords.netlify.app/assets/pwricon.png",
+    "url": "https://poisonwellrecords.com",
+    "logo": "https://poisonwellrecords.com/assets/jamestown%20the%20pitts.png",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Ventura",
@@ -50,6 +52,7 @@
       "https://www.tiktok.com/@poisonwellrecords",
       "https://www.instagram.com/poisonwellrecords",
       "https://www.discogs.com/user/PoisonWellRecords",
+      "https://poisonwellrecords.bandcamp.com",
       "https://www.facebook.com/poisonwellrecords/",
       "https://www.youtube.com/@poisonwellrecords"
     ],
@@ -68,18 +71,21 @@
   {
     "@context": "https://schema.org",
     "@type": "Store",
+    "@id": "https://poisonwellrecords.com/#store",
     "name": "Poison Well Records",
-    "image": "https://poisonwellrecords.netlify.app/assets/pwricon.png",
+    "parentOrganization": { "@id": "https://poisonwellrecords.com/#organization" },
+    "image": "https://poisonwellrecords.com/assets/jamestown%20the%20pitts.png",
     "description": "805 and SoCal punk vinyl record store and label shipping worldwide from Ventura, California",
-    "url": "https://poisonwellrecords.netlify.app",
+    "url": "https://poisonwellrecords.com/ventura-punk-record-store-online",
     "email": "poisonwellrecords@gmail.com",
-    "priceRange": "$25-$49",
+    "priceRange": "$25-$80",
     "paymentAccepted": "Credit Card, Debit Card",
     "currenciesAccepted": "USD",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Ventura",
       "addressRegion": "CA",
+      "postalCode": "93001",
       "addressCountry": "US"
     },
     "geo": {
@@ -90,47 +96,45 @@
     "areaServed": "Worldwide"
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://poisonwellrecords.com/#website",
+    "url": "https://poisonwellrecords.com/",
+    "name": "Poison Well Records",
+    "description": "Ventura 805 punk vinyl label, online shop, and Digital Music Hub for SoCal underground releases.",
+    "publisher": { "@id": "https://poisonwellrecords.com/#organization" },
+    "inLanguage": "en-US"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": "https://poisonwellrecords.com/#featured-releases",
+    "name": "Featured releases",
+    "numberOfItems": 12,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Dr. Know — Live CBGB 1989" },
+      { "@type": "ListItem", "position": 2, "name": "The Pitts — Jamestown" },
+      { "@type": "ListItem", "position": 3, "name": "Narthex Structure — 1984" },
+      { "@type": "ListItem", "position": 4, "name": "Shim Come Quick — Denim, Leather & Chains" },
+      { "@type": "ListItem", "position": 5, "name": "I Decline — Failure By Design" },
+      { "@type": "ListItem", "position": 6, "name": "The Missing 23rd — The End of an Error" },
+      { "@type": "ListItem", "position": 7, "name": "RAW — Sick Love / Quarantine" },
+      { "@type": "ListItem", "position": 8, "name": "Front Street Knuckle Draggers" },
+      { "@type": "ListItem", "position": 9, "name": "Los Bonedrivers — Whores" },
+      { "@type": "ListItem", "position": 10, "name": "Rubberband — Babe Magnet" },
+      { "@type": "ListItem", "position": 11, "name": "Handsome Devils — VTK" },
+      { "@type": "ListItem", "position": 12, "name": "All a Blur — Self Titled" }
+    ]
+  }
+  </script>
 </head>
 
-<body class="gate-active">
+<body>
   <div class="promo-banner">Free Shipping on every $65 order</div>
-  <div id="splash-gate" class="splash-gate" aria-label="Site opening screen">
-    <!-- SPINNING VINYL BACKGROUND ELEMENTS -->
-    <div class="vinyl-bg-spinner" aria-hidden="true"></div>
-    <div class="vinyl-bg-spinner-2" aria-hidden="true"></div>
-    <div class="vinyl-bg-spinner-3" aria-hidden="true"></div>
-
-    <div class="splash-video-wrap" id="splash-video-wrap" role="button" tabindex="0"
-      aria-label="Play Poison Well Records intro">
-      <div class="splash-video-stage">
-        <img src="assets/jamestown the pitts.png" class="splash-corner-album" alt="Featured album art" aria-hidden="true" />
-        <video id="splash-video" class="splash-video" muted playsinline preload="auto" aria-hidden="true" autoplay
-          style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
-          <source src="assets/startofsite.mp4" type="video/mp4">
-        </video>
-        <div id="splash-logo-reveal" class="splash-logo-reveal" style="display:flex; align-items:center; justify-content:center; height:100%; position:relative; z-index:2;"></div>
-      </div>
-    </div>
-    <div class="splash-inner">
-      <h2 class="splash-title">Welcome. Where Punk Lives.</h2>
-      <p class="splash-sub">Poison Well Records</p>
-      <p class="enter-hint" id="enter-hint">Playing intro...</p>
-      <button type="button" id="skip-splash-btn" onclick="if(window.PW_dismissSplash) { window.PW_dismissSplash(); } else { document.getElementById('splash-gate').style.display='none'; document.body.classList.remove('gate-active'); }" style="padding: 10px 20px; background: transparent; color: white; border: 1px solid white; cursor: pointer; border-radius: 4px; margin-top: 15px; font-family: 'Courier New', monospace; text-transform: uppercase;">Skip Intro</button>
-      <script>
-        // Emergency Splash Dismiss Logic
-        document.getElementById('skip-splash-btn').addEventListener('click', function() {
-          var gate = document.getElementById('splash-gate');
-          if (gate) {
-            gate.style.opacity = '0';
-            setTimeout(function() { 
-              gate.style.display = 'none';
-              document.body.classList.remove('gate-active');
-            }, 500);
-          }
-        });
-      </script>
-    </div>
-  </div>
   <!-- HEADER / NAV -->
   <header class="site-header">
     <div class="container nav">
@@ -145,7 +149,6 @@
         <div class="nav-dropdown">
           <a class="nav-main" href="ventura-punk-record-store-online.html">Shop</a>
           <div class="dropdown-content">
-            <a href="ventura-punk-record-store-online.html">Shop</a>
             <a href="ventura-punk-record-store-online.html#tab-vinyl">Buy Vinyl</a>
             <a href="rarities.html">Rarities</a>
           </div>
@@ -161,72 +164,200 @@
     </div>
   </header>
 
-  <main>
-    <!-- SHOP BY CATEGORY - FIRST SECTION -->
-    <section class="shop-categories" id="shop-categories">
+  <main id="top">
+    <section class="home-intro" aria-labelledby="home-heading">
       <div class="container">
-        <h2>Shop by Category</h2>
-        <div class="category-grid">
-          <a href="ventura-punk-record-store-online.html#tab-vinyl" class="category-card">
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="22" />
-                <circle cx="32" cy="32" r="12" />
-                <circle cx="32" cy="32" r="3.5" fill="currentColor" stroke="none" />
-                <path d="M46 24a16 16 0 0 1 0 16" />
-              </svg>
-            </div>
-            <h3>Vinyl Records</h3>
-            <p>Press and core catalog releases from the 805 scene and beyond</p>
-          </a>
-          <a href="rarities.html" class="category-card">
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="22" />
-                <circle cx="32" cy="32" r="12" />
-                <path d="M32 18l4.5 9 10 .9-7.5 6.5 2.3 9.6L32 39l-9.3 5 2.3-9.6-7.5-6.5 10-.9z" fill="currentColor" stroke="none" />
-              </svg>
-            </div>
-            <h3>Rarities</h3>
-            <p>Rare drops, one-offs, and direct links to Press updates on archive releases</p>
-          </a>
+        <h1 id="home-heading">Poison Well Records — Ventura 805 punk vinyl</h1>
+        <p class="home-intro-lead">Independent label and archive shop for 805 &amp; SoCal punk. Browse featured vinyl, <a href="rarities.html">rarities</a>, and the <a href="digital-music-hub.html">Digital Music Hub</a>.</p>
+      </div>
+    </section>
 
-          <a href="digital-music-hub.html" class="category-card">
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="22" />
-                <circle cx="32" cy="32" r="12" />
-                <path d="M38 18v17.5a6 6 0 1 1-3-5.2V21l12-3v13.5a6 6 0 1 1-3-5.2V22z" fill="currentColor" stroke="none" />
-              </svg>
+
+    <!-- FEATURED RELEASES -->
+    <section class="releases" id="releases">
+      <div class="container">
+        <h2>Featured Releases</h2>
+        <div class="release-grid">
+          <!-- RELEASE CARD 1: Dr. Know -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/dr-know-live-cbgb-1989-ventura-punk-vinyl.jpg"
+                alt="Dr. Know - Live CBGB 1989 vinyl cover" />
             </div>
-            <h3>Digital Music Hub</h3>
-            <p>Streaming destination plus About context for featured artists and releases</p>
-          </a>
-          <a href="press.html" class="category-card">
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="22" />
-                <circle cx="32" cy="32" r="12" opacity="0.38" />
-                <path d="M25 20h14l5 5v19H25z" />
-                <path d="M39 20v6h6" />
-                <path d="M29 31h11M29 36h11M29 41h8" />
-              </svg>
+            <div class="release-info">
+              <div class="artist">Dr. Know</div>
+              <h3>Live CBGB 1989</h3>
             </div>
-            <h3>Press</h3>
-            <p>Media validation, scene stories, and official release coverage</p>
-          </a>
-          <a href="about-poison-well-records.html" class="category-card">
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="22" />
-                <circle cx="32" cy="32" r="12" opacity="0.38" />
-                <circle cx="32" cy="23" r="4.2" fill="currentColor" stroke="none" />
-                <path d="M22 42c2.6-6 6.9-9 10-9s7.4 3 10 9" />
-              </svg>
+            <div class="release-links">
+              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('drKnowLiveCbgb1989', this)">Buy Vinyl</button>
             </div>
-            <h3>About</h3>
-            <p>Background on Poison Well Records, mission, and scene roots</p>
-          </a>
+          </article>
+
+          <!-- RELEASE CARD 2: THE PITTS (HIGHLIGHTED) -->
+          <article class="release-card highlight-card">
+            <div class="card-badge">Store Favorite</div>
+            <div class="release-cover">
+              <img src="assets/jamestown the pitts.png" class="release-cover-image" alt="The Pitts - Jamestown vinyl cover" />
+            </div>
+            <div class="release-info">
+              <div class="artist">The Pitts</div>
+              <h3>Jamestown</h3>
+            </div>
+            <div class="release-links">
+              <a class="btn primary buy-btn" href="digital-music-hub.html#hub-the-pitts">Digital hub</a>
+            </div>
+            <div class="featured-release-note">Featured Release</div>
+          </article>
+
+          <!-- RELEASE CARD 3: Narthex Structure -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/narthex-structure-1984-ventura-805-punk-vinyl.jpg"
+                alt="Narthex Structure - 1984 vinyl cover" />
+            </div>
+            <div class="release-info">
+              <div class="artist">Narthex Structure</div>
+              <h3>1984</h3>
+            </div>
+            <div class="release-links">
+              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('narthexStructure1984', this)">Buy Vinyl</button>
+            </div>
+          </article>
+
+          <!-- Shim Come Quick — Denim, Leather & Chains (hub + shop use canonical title) -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/slim-come-quick-denim-leather-and-chains-punk-vinyl.jpg"
+                alt="Shim Come Quick — Denim, Leather &amp; Chains vinyl cover" />
+            </div>
+            <div class="release-info">
+              <div class="artist">Shim Come Quick</div>
+              <h3>Denim, Leather &amp; Chains</h3>
+            </div>
+            <div class="release-links">
+              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('slimComeQuickDenimLeatherAndChains', this)">Buy Vinyl</button>
+            </div>
+          </article>
+
+          <!-- I Decline — Failure By Design -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/i-decline-failure-by-design-socal-punk-vinyl.jpg"
+                alt="I Decline — Failure By Design vinyl cover" />
+            </div>
+            <div class="release-info">
+              <div class="artist">I Decline</div>
+              <h3>Failure By Design</h3>
+            </div>
+            <div class="release-links">
+              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('iDeclineFailureByDesign', this)">Buy Vinyl</button>
+            </div>
+          </article>
+
+          <!-- The Missing 23rd — The End of an Error -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/the-missing-23rd-the-end-of-an-error-ventura-hardcore-vinyl.jpg"
+                alt="The Missing 23rd — The End of an Error vinyl cover" />
+            </div>
+            <div class="release-info">
+              <div class="artist">The Missing 23rd</div>
+              <h3>The End of an Error</h3>
+            </div>
+            <div class="release-links">
+              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('theMissing23rdEndOfAnError', this)">Buy Vinyl</button>
+            </div>
+          </article>
+
+          <!-- RAW — Sick Love / Quarantine -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/raw-radioactive-waste-805-punk-vinyl.jpg"
+                alt="RAW — Sick Love / Quarantine vinyl cover" />
+            </div>
+            <div class="release-info">
+              <div class="artist">RAW</div>
+              <h3>Sick Love / Quarantine</h3>
+            </div>
+            <div class="release-links">
+              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('rawSickLove', this)">Buy Vinyl</button>
+            </div>
+          </article>
+
+          <!-- Front Street Knuckle Draggers -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/front-street-knuckle-draggers-805-punk-record.jpg"
+                alt="Front Street Knuckle Draggers vinyl cover" />
+            </div>
+            <div class="release-info">
+              <div class="artist">FSKD</div>
+              <h3>Front Street Knuckle Draggers</h3>
+            </div>
+            <div class="release-links">
+              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('frontStreetKnuckleDraggers', this)">Buy Vinyl</button>
+            </div>
+          </article>
+
+          <!-- Los Bonedrivers — Whores -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image cover-show-full" loading="lazy" width="400" height="400" src="assets/los-bonedrivers-socal-punk-vinyl.jpg"
+                alt="Los Bonedrivers — Whores vinyl cover" />
+            </div>
+            <div class="release-info">
+              <div class="artist">Los Bonedrivers</div>
+              <h3>Whores</h3>
+            </div>
+            <div class="release-links">
+              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('losBonedrivers', this)">Buy Vinyl</button>
+            </div>
+          </article>
+
+          <!-- Rubberband — digital-first in catalog; hub has streaming links -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/rubberband - babe magnet.webp"
+                alt="Rubberband — Babe Magnet" />
+            </div>
+            <div class="release-info">
+              <div class="artist">Rubberband</div>
+              <h3>Babe Magnet</h3>
+            </div>
+            <div class="release-links">
+              <a class="btn primary buy-btn" href="digital-music-hub.html#hub-rubberband">Digital hub</a>
+            </div>
+          </article>
+
+          <!-- Handsome Devils — digital-first in catalog -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/handsome devils - vtk.jpg"
+                alt="Handsome Devils — VTK" />
+            </div>
+            <div class="release-info">
+              <div class="artist">Handsome Devils</div>
+              <h3>VTK</h3>
+            </div>
+            <div class="release-links">
+              <a class="btn primary buy-btn" href="digital-music-hub.html#hub-handsome-devils">Digital hub</a>
+            </div>
+          </article>
+
+          <!-- All a Blur — digital-first in catalog -->
+          <article class="release-card">
+            <div class="release-cover">
+              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/allblur.png"
+                alt="All a Blur — Self Titled cover" />
+            </div>
+            <div class="release-info">
+              <div class="artist">All a Blur</div>
+              <h3>Self Titled</h3>
+            </div>
+            <div class="release-links">
+              <a class="btn primary buy-btn" href="digital-music-hub.html#hub-all-a-blur">Digital hub</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -288,151 +419,6 @@
               piece
               of history.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURED RELEASES -->
-    <section class="releases" id="releases">
-      <div class="container">
-        <h2>Featured Releases</h2>
-        <div class="release-grid">
-          <!-- RELEASE CARD 1: Dr. Know -->
-          <article class="release-card">
-            <div class="release-cover">
-              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/dr-know-live-cbgb-1989-ventura-punk-vinyl.jpg"
-                alt="Dr. Know - Live CBGB 1989 vinyl cover" />
-            </div>
-            <div class="release-info">
-              <div class="artist">Dr. Know</div>
-              <h3>Live CBGB 1989</h3>
-            </div>
-            <div class="release-links">
-              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('drKnowLiveCbgb1989', this)">Buy Vinyl</button>
-            </div>
-          </article>
-
-          <!-- RELEASE CARD 2: THE PITTS (HIGHLIGHTED) -->
-          <article class="release-card highlight-card">
-            <div class="card-badge">Store Favorite</div>
-            <div class="release-cover">
-              <img src="assets/jamestown the pitts.png" class="release-cover-image" alt="The Pitts - Jamestown vinyl cover" />
-            </div>
-            <div class="release-info">
-              <div class="artist">The Pitts</div>
-              <h3>Jamestown</h3>
-            </div>
-            <p style="font-size: 0.9rem; font-style: italic; color: #ffd700; margin-bottom: 1.5rem; text-align: center; padding: 0 1rem; opacity: 0.85;">"A definitive masterpiece of the 805 sound. Essential listening."</p>
-            <div class="release-links">
-              <a class="btn primary buy-btn" href="https://thepittsnd.bandcamp.com" target="_blank" rel="noopener noreferrer">Buy Digital</a>
-            </div>
-            <div class="featured-release-note">Featured Release</div>
-          </article>
-
-          <!-- RELEASE CARD 3: Narthex Structure -->
-          <article class="release-card">
-            <div class="release-cover">
-              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/narthex-structure-1984-ventura-805-punk-vinyl.jpg"
-                alt="Narthex Structure - 1984 vinyl cover" />
-            </div>
-            <div class="release-info">
-              <div class="artist">Narthex Structure</div>
-              <h3>1984</h3>
-            </div>
-            <div class="release-links">
-              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('narthexStructure1984', this)">Buy Vinyl</button>
-            </div>
-          </article>
-
-          <!-- RELEASE CARD 5: Shim Come Quick - In Between -->
-          <article class="release-card">
-            <div class="release-cover">
-              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/slim-come-quick-denim-leather-and-chains-punk-vinyl.jpg"
-                alt="Shim Come Quick - In Between vinyl cover" />
-            </div>
-            <div class="release-info">
-              <div class="artist">Shim Come Quick</div>
-              <h3>In Between</h3>
-            </div>
-            <div class="release-links">
-              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('shimComeQuickInBetween', this)">Buy Vinyl</button>
-            </div>
-          </article>
-
-          <!-- RELEASE CARD 6: Stäläg 13 - In Control -->
-          <article class="release-card">
-            <div class="release-cover">
-              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/raw-quarantine-ventura-punk-vinyl.jpg"
-                alt="Stäläg 13 - In Control vinyl cover" />
-            </div>
-            <div class="release-info">
-              <div class="artist">Stäläg 13</div>
-              <h3>In Control</h3>
-            </div>
-            <div class="release-links">
-              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('stalag13InControl', this)">Buy Vinyl</button>
-            </div>
-          </article>
-
-          <!-- RELEASE CARD 7: Ill Repute - What's Next? -->
-          <article class="release-card">
-            <div class="release-cover">
-              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/split at the scenes.jpg"
-                alt="Ill Repute - What's Next? vinyl cover" />
-            </div>
-            <div class="release-info">
-              <div class="artist">Ill Repute</div>
-              <h3>What's Next?</h3>
-            </div>
-            <div class="release-links">
-              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('illReputeWhatsNext', this)">Buy Vinyl</button>
-            </div>
-          </article>
-
-          <!-- RELEASE CARD 8: False Confession - 1984 -->
-          <article class="release-card">
-            <div class="release-cover">
-              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/raw-sick-love.jpg"
-                alt="False Confession - 1984 vinyl cover" />
-            </div>
-            <div class="release-info">
-              <div class="artist">False Confession</div>
-              <h3>1984</h3>
-            </div>
-            <div class="release-links">
-              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('falseConfession1984', this)">Buy Vinyl</button>
-            </div>
-          </article>
-
-          <!-- RELEASE CARD 10: RKL - Live in Berlin -->
-          <article class="release-card">
-            <div class="release-cover">
-              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/dr-know-live-cbgb-1989-ventura-punk-vinyl.jpg"
-                alt="RKL - Live in Berlin vinyl cover" />
-            </div>
-            <div class="release-info">
-              <div class="artist">R.K.L.</div>
-              <h3>Live in Berlin</h3>
-            </div>
-            <div class="release-links">
-              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('rklLiveBerlin', this)">Buy Vinyl</button>
-            </div>
-          </article>
-
-          <!-- RELEASE CARD 11: Scared Straight - Born to Be Wild -->
-          <article class="release-card">
-            <div class="release-cover">
-              <img class="release-cover-image" loading="lazy" width="400" height="400" src="assets/the-missing-23rd-the-end-of-an-error-ventura-hardcore-vinyl.jpg"
-                alt="Scared Straight - Born to Be Wild vinyl cover" />
-            </div>
-            <div class="release-info">
-              <div class="artist">Scared Straight</div>
-              <h3>Born to Be Wild</h3>
-            </div>
-            <div class="release-links">
-              <button class="btn primary buy-btn" type="button" onclick="goToCheckout('scaredStraightBornWild', this)">Buy Vinyl</button>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -514,7 +500,7 @@
     <section class="store-info" id="store-info">
       <div class="container">
         <h2>Shipping, Grading &amp; Returns</h2>
-        <p>Direct on-site checkout is active. All domestic and international orders are processed through a secure archival-grade Stripe protocol.</p>
+        <p>Checkout is available on eligible titles. Domestic and international orders are processed securely through Stripe.</p>
       </div>
     </section>
 

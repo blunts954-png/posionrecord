@@ -1,5 +1,5 @@
 (function () {
-  const baseUrl = 'https://poisonwellrecords.netlify.app';
+  const baseUrl = 'https://poisonwellrecords.com';
   const pathMap = {
     'index.html': '/',
     'ventura-punk-vinyl.html': '/ventura-punk-vinyl',
@@ -18,27 +18,6 @@
     '805-punk-shows-events.html': '/805-punk-shows-events',
     'thank-you.html': '/thank-you'
   };
-  let pageGateFailSafeTimer = null;
-
-  function forceOpenSplashGate() {
-    const gate = document.getElementById('splash-gate');
-    document.body.classList.remove('gate-active');
-    if (!gate) return;
-    gate.classList.add('open', 'hide');
-    gate.style.pointerEvents = 'none';
-    gate.style.display = 'none';
-    gate.setAttribute('aria-hidden', 'true');
-  }
-
-  // Never let the intro gate block access if a later initializer throws.
-  const gateCheck = document.getElementById('splash-gate');
-  if (gateCheck) {
-    pageGateFailSafeTimer = window.setTimeout(forceOpenSplashGate, 14000);
-  } else if (document.body.classList.contains('gate-active')) {
-    // Immediate cleanup if class is present but gate is missing (ghosting fix)
-    document.body.classList.remove('gate-active');
-  }
-
   function currentFile() {
     const p = window.location.pathname;
     const f = p.split('/').pop();
@@ -209,7 +188,7 @@
       if (window.scrollY > 400) btn.classList.add('visible');
       else btn.classList.remove('visible');
     });
-    btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' }); });
   }
 
 
@@ -223,7 +202,7 @@
     '/assets/Narthex Structure - Expression.jpg': '/assets/narthex structure - expression.jpg',
     '/assets/Rubberband - babe magnet.webp': '/assets/rubberband - babe magnet.webp'
   };
-  const fallbackCover = '/assets/idecline-skull-headed.jpg';
+  const fallbackCover = '/assets/jamestown the pitts.png';
   images.forEach(function (img) {
     const currentSrc = img.getAttribute('src');
     if (currentSrc && imagePathFixes[currentSrc]) {
@@ -264,7 +243,7 @@
       name: 'Poison Well Records',
       description: 'Ventura 805 punk vinyl label and online store archiving SoCal punk rock',
       url: baseUrl,
-      logo: baseUrl + '/assets/pwricon.png',
+      logo: baseUrl + '/assets/jamestown%20the%20pitts.png',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Ventura',
@@ -291,7 +270,7 @@
       '@context': 'https://schema.org',
       '@type': 'Store',
       'name': 'Poison Well Records Shop',
-      'image': baseUrl + '/assets/pwricon.png',
+      'image': baseUrl + '/assets/jamestown%20the%20pitts.png',
       'description': '805 and SoCal punk vinyl record store and label shipping worldwide from Ventura, California',
       'address': {
         '@type': 'PostalAddress',
@@ -346,8 +325,6 @@
     document.head.appendChild(crumbNode);
   }
 
-  const stripeLinks = window.POISON_WELL_STRIPE_LINKS || {};
-
   /** Netlify Forms expects POST to the current page path (not always `/`). */
   function netlifyFormPostPath() {
     var p = window.location.pathname || '/';
@@ -372,9 +349,16 @@
   }
 
   function fallbackToStripePaymentLink(productKey, quantity) {
+    const stripeLinks = window.POISON_WELL_STRIPE_LINKS || {};
     const checkoutUrl = stripeLinks[productKey];
     if (!checkoutUrl) return false;
-    const url = quantity > 1 ? (checkoutUrl + '?qty=' + quantity) : checkoutUrl;
+    const trimmed = String(checkoutUrl).trim();
+    const hasPlaceholder = trimmed.indexOf('REPLACE_') !== -1;
+    const isStripeBuyLink = /^https:\/\/buy\.stripe\.com\/.+/i.test(trimmed);
+    if (!trimmed || hasPlaceholder || !isStripeBuyLink) {
+      return false;
+    }
+    const url = quantity > 1 ? (trimmed + '?qty=' + quantity) : trimmed;
     window.location.href = url;
     return true;
   }
@@ -401,19 +385,12 @@
 
   window.goToCheckout = async function (productKey, triggerEl) {
     setCheckoutBusy(triggerEl, true, 'Opening Stripe...');
-    try {
-      const payload = await createStripeCheckoutSession(productKey, {
-        quantity: 1,
-        cancelPath: window.location.pathname + window.location.search + window.location.hash
-      });
-      window.location.href = payload.url;
-    } catch (error) {
+    if (fallbackToStripePaymentLink(productKey, 1)) {
       setCheckoutBusy(triggerEl, false);
-      if (fallbackToStripePaymentLink(productKey, 1)) {
-        return;
-      }
-      alert(error && error.message ? error.message : 'Stripe checkout is unavailable right now.');
+      return;
     }
+    setCheckoutBusy(triggerEl, false);
+    alert('No Stripe Payment Link is configured for this product yet.');
   };
 
   // Variant-aware checkout helper: accepts a base product key and the card element
@@ -423,19 +400,12 @@
     const qty = clampCheckoutQuantity((cardEl.querySelector('.qty-input') && cardEl.querySelector('.qty-input').value) || 1, 10);
     const variantKey = size ? (baseKey + '_' + size) : baseKey;
     setCheckoutBusy(triggerEl, true, 'Opening Stripe...');
-    try {
-      const payload = await createStripeCheckoutSession(variantKey, {
-        quantity: qty
-      });
-      window.location.href = payload.url;
-      return;
-    } catch (error) {
+    if (fallbackToStripePaymentLink(variantKey, qty) || fallbackToStripePaymentLink(baseKey, qty)) {
       setCheckoutBusy(triggerEl, false);
-      if (fallbackToStripePaymentLink(variantKey, qty) || fallbackToStripePaymentLink(baseKey, qty)) {
-        return;
-      }
-      alert(error && error.message ? error.message : ('No checkout path configured for ' + variantKey + '.'));
+      return;
     }
+    setCheckoutBusy(triggerEl, false);
+    alert('No Stripe Payment Link is configured for ' + variantKey + '.');
   };
 
   // Update buy button labels to reflect selected size and quantity
@@ -634,275 +604,7 @@ function initAll() {
 
 document.addEventListener('DOMContentLoaded', initAll);
 
-  const gate = document.getElementById('splash-gate');
-  const splashVideo = document.getElementById('splash-video');
-  const splashVideoWrap = document.getElementById('splash-video-wrap');
-  const splashVideoCta = document.getElementById('splash-video-cta');
-  const enterHint = document.getElementById('enter-hint');
-  if (gate && splashVideo) {
-    document.body.classList.add('gate-active');
-    let introFollowRaf = null;
-    let hideGateTimer = null;
-    let forcedOpenTimer = null;
-    let gateReleased = false;
-    const clamp = function (value, min, max) {
-      return Math.max(min, Math.min(max, value));
-    };
-    const clearGateTimers = function () {
-      if (hideGateTimer) {
-        window.clearTimeout(hideGateTimer);
-        hideGateTimer = null;
-      }
-      if (forcedOpenTimer) {
-        window.clearTimeout(forcedOpenTimer);
-        forcedOpenTimer = null;
-      }
-    };
-    const resetIntroView = function () {
-      splashVideo.style.setProperty('--intro-scale', '1');
-      splashVideo.style.setProperty('--intro-shift-y', '0%');
-      splashVideo.style.setProperty('--intro-origin-y', '50%');
-    };
-    const stopIntroFollow = function () {
-      if (introFollowRaf) {
-        window.cancelAnimationFrame(introFollowRaf);
-        introFollowRaf = null;
-      }
-    };
-    const runIntroFollow = function () {
-      const duration = splashVideo.duration;
-      const progress = duration && Number.isFinite(duration) ? clamp(splashVideo.currentTime / duration, 0, 1) : 0;
-      const diveStart = 0.64;
-      const diveProgress = clamp((progress - diveStart) / (1 - diveStart), 0, 1);
-      const eased = Math.pow(diveProgress, 2.2);
-      const maxScale = window.matchMedia('(max-width: 700px)').matches ? 1.72 : 1.52;
-      const scale = 1 + ((maxScale - 1) * eased);
-      const shiftY = (-1.4 * eased);
-      const originY = 50 + (9 * eased);
-      splashVideo.style.setProperty('--intro-scale', scale.toFixed(3));
-      splashVideo.style.setProperty('--intro-shift-y', shiftY.toFixed(2) + '%');
-      splashVideo.style.setProperty('--intro-origin-y', originY.toFixed(1) + '%');
-      if (!splashVideo.paused && !splashVideo.ended && !gate.classList.contains('open')) {
-        introFollowRaf = window.requestAnimationFrame(runIntroFollow);
-      } else {
-        introFollowRaf = null;
-      }
-    };
-    const startIntroFollow = function () {
-      stopIntroFollow();
-      resetIntroView();
-      introFollowRaf = window.requestAnimationFrame(runIntroFollow);
-    };
-    const extraIntroMs = 5000;
-    const scheduleGateFallback = function () {
-      if (gateReleased || gate.classList.contains('video-awaiting-input')) {
-        return;
-      }
-      if (forcedOpenTimer) {
-        window.clearTimeout(forcedOpenTimer);
-      }
-      const durationMs = Number.isFinite(splashVideo.duration) && splashVideo.duration > 0
-        ? Math.ceil(Math.max(2, splashVideo.duration - splashVideo.currentTime + 0.35) * 1000) + extraIntroMs
-        : 12000;
-      forcedOpenTimer = window.setTimeout(function () {
-        openGate();
-      }, durationMs);
-    };
-    const openGate = function () {
-      if (gateReleased || gate.classList.contains('open')) return;
-      gateReleased = true;
-      if (pageGateFailSafeTimer) {
-        window.clearTimeout(pageGateFailSafeTimer);
-        pageGateFailSafeTimer = null;
-      }
-      clearGateTimers();
-      stopIntroFollow();
-      gate.classList.remove('video-awaiting-input');
-      gate.classList.remove('video-playing');
-      gate.classList.add('open');
-      gate.style.pointerEvents = 'none';
-      gate.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('gate-active');
-      hideGateTimer = window.setTimeout(function () {
-        gate.classList.add('hide');
-        gate.style.display = 'none';
-      }, 620);
-    };
 
-    const showTapToPlay = function () {
-      clearGateTimers();
-      stopIntroFollow();
-      resetIntroView();
-      gate.classList.remove('video-playing');
-      gate.classList.add('video-awaiting-input');
-      if (enterHint) enterHint.textContent = 'Tap video to start intro or wait to enter site';
-      forcedOpenTimer = window.setTimeout(function () {
-        if (gateReleased || !gate.classList.contains('video-awaiting-input')) {
-          return;
-        }
-        if (enterHint) enterHint.textContent = 'Opening site...';
-        openGate();
-      }, 4000);
-    };
-
-    const markPlaying = function () {
-      gate.classList.add('video-playing');
-      gate.classList.remove('video-awaiting-input');
-      if (enterHint) enterHint.textContent = 'Playing intro... (Tap to skip)';
-      startIntroFollow();
-      scheduleGateFallback();
-      
-      // Anti-freeze logic: If video time doesn't advance for 2 seconds while "playing", bypass
-      let lastCheckTime = splashVideo.currentTime;
-      let stallCounter = 0;
-      const stallInterval = window.setInterval(function() {
-        if (gateReleased) {
-          window.clearInterval(stallInterval);
-          return;
-        }
-        if (splashVideo.paused) return;
-        
-        if (Math.abs(splashVideo.currentTime - lastCheckTime) < 0.01) {
-          stallCounter++;
-          if (stallCounter >= 4) { // 2 seconds (0.5s * 4)
-            console.log("Splash bypass via stall detection");
-            window.clearInterval(stallInterval);
-            openGate();
-          }
-        } else {
-          stallCounter = 0;
-          lastCheckTime = splashVideo.currentTime;
-        }
-      }, 500);
-    };
-
-    const playIntro = function () {
-      if (gateReleased) {
-        return;
-      }
-      splashVideo.muted = true;
-      if (
-        splashVideo.ended ||
-        (Number.isFinite(splashVideo.duration) && splashVideo.duration > 0 && splashVideo.currentTime >= splashVideo.duration - 0.2)
-      ) {
-        splashVideo.currentTime = 0;
-      }
-      const playPromise = splashVideo.play();
-      if (playPromise && typeof playPromise.then === 'function') {
-        playPromise.then(function () {
-          markPlaying();
-        }).catch(function () {
-          showTapToPlay();
-        });
-      } else {
-        markPlaying();
-      }
-
-      // Safety timeout in case video hangs or fails to fire 'ended'
-      window.setTimeout(function() {
-        if (!gate.classList.contains('open')) {
-          console.log("Splash bypass via safety timeout after 5s");
-          openGate();
-        }
-      }, 12500); // give video + logo reveal noticeably longer runway
-      
-      // Expose to global for the skip button in index.html
-      window.PW_dismissSplash = openGate;
-    };
-
-    // Early bypass for broken files (e.g. 0-byte startofsite.mp4)
-    splashVideo.addEventListener('error', function() {
-      console.warn("Splash video error or 0-byte file detected. Opening gate.");
-      openGate(); 
-    });
-    
-    // Check if video is functionally broken on start
-    window.setTimeout(function() {
-      const isBroken = splashVideo.readyState === 0 || 
-                       (splashVideo.networkState === 3) || 
-                       (splashVideo.error);
-      if (isBroken && !gateReleased) {
-        console.warn("Splash video seems broken or missing. Failsafe bypass.");
-        openGate();
-      }
-    }, 2000);
-
-    splashVideo.addEventListener('ended', function () {
-      window.setTimeout(openGate, extraIntroMs);
-    });
-    splashVideo.addEventListener('loadedmetadata', scheduleGateFallback);
-    splashVideo.addEventListener('playing', function() {
-      const fallback = document.getElementById('splash-logo-fallback');
-      if (fallback) {
-        window.setTimeout(function () {
-          fallback.style.opacity = '0';
-        }, 1200);
-      }
-    });
-    splashVideo.addEventListener('canplay', scheduleGateFallback);
-    splashVideo.addEventListener('timeupdate', function () {
-      // Intentionally no auto-open near the end; we keep the final frame
-      // visible longer for the logo/album reveal.
-    });
-
-    const startFromUser = function (e) {
-      if (e && typeof e.preventDefault === 'function') e.preventDefault();
-      if (gate.classList.contains('video-playing')) {
-        openGate(); // Skip if already playing
-      } else {
-        playIntro();
-      }
-    };
-
-    if (splashVideoWrap) {
-      splashVideoWrap.addEventListener('click', function () {
-        if (gate.classList.contains('video-awaiting-input')) {
-          startFromUser();
-        } else if (gate.classList.contains('video-playing')) {
-          openGate(); // Click to skip
-        }
-      });
-      splashVideoWrap.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          if (gate.classList.contains('video-awaiting-input')) {
-            startFromUser(e);
-          } else if (gate.classList.contains('video-playing')) {
-            openGate();
-          }
-        }
-      });
-    }
-
-    if (splashVideoCta) {
-      splashVideoCta.addEventListener('click', startFromUser);
-    }
-
-    if (gate) {
-      gate.addEventListener('click', function() {
-        if (gate.classList.contains('video-awaiting-input')) {
-          startFromUser();
-        } else if (gate.classList.contains('video-playing')) {
-          openGate();
-        }
-      });
-    }
-
-    resetIntroView();
-    playIntro();
-    window.setTimeout(function () {
-      if (gateReleased) {
-        return;
-      }
-      if (splashVideo.paused && !gate.classList.contains('open')) {
-        showTapToPlay();
-      }
-    }, 1500); // Give it a bit more time on slow mobile connections
-    window.setTimeout(function () {
-      if (!gateReleased && !gate.classList.contains('video-awaiting-input')) {
-        openGate();
-      }
-    }, 23000);
-  }
 
   // Newsletter form handling (Netlify-friendly + AJAX fallback)
   (function () {

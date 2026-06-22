@@ -14,11 +14,12 @@
  */
 window.POISON_WELL_STRIPE_LINKS = window.POISON_WELL_STRIPE_LINKS || {};
 
-const STRIPE_LINK_25 = "https://buy.stripe.com/REPLACE_25_DOLLAR_LINK";
-const STRIPE_LINK_49 = "https://buy.stripe.com/REPLACE_49_DOLLAR_LINK";
+const STRIPE_LINK_25 = "https://buy.stripe.com/8x29AM7DdfsJdk6e57bEA01";
+const STRIPE_LINK_45 = "https://buy.stripe.com/28E9AM7Dd6Wdcg2d13bEA02";
+const STRIPE_LINK_80 = "https://buy.stripe.com/28EcMY9Ll80h0xkf9bbEA03";
 
 Object.assign(window.POISON_WELL_STRIPE_LINKS, {
-  drKnowLiveCbgb1989: STRIPE_LINK_49,
+  drKnowLiveCbgb1989: STRIPE_LINK_45,
   losBonedrivers: STRIPE_LINK_25,
   slimComeQuickDenimLeatherAndChains: STRIPE_LINK_25,
   thePittsJamestown: STRIPE_LINK_25,
@@ -28,11 +29,7 @@ Object.assign(window.POISON_WELL_STRIPE_LINKS, {
   iDeclineFailureByDesign: STRIPE_LINK_25,
   iDecline: STRIPE_LINK_25,
   frontStreetKnuckleDraggers: STRIPE_LINK_25,
-  shimComeQuickInBetween: STRIPE_LINK_25,
-  stalag13InControl: STRIPE_LINK_25,
-  illReputeWhatsNext: STRIPE_LINK_25,
-  falseConfession1984: STRIPE_LINK_25,
-  agressionFullCircle: STRIPE_LINK_25,
-  rklLiveBerlin: STRIPE_LINK_25,
-  scaredStraightBornWild: STRIPE_LINK_25
+  /** Rarity-tier fallbacks — replace with real $80 Payment Link when available */
+  fluidFilledIDecline: STRIPE_LINK_80,
+  splatterIDecline: STRIPE_LINK_80
 });
