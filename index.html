@@ -133,44 +133,8 @@
   </script>
 </head>
 
-<body class="gate-active">
+<body>
   <div class="promo-banner">Free Shipping on every $65 order</div>
-  <div id="splash-gate" class="splash-gate" aria-label="Site opening screen">
-    <!-- SPINNING VINYL BACKGROUND ELEMENTS -->
-    <div class="vinyl-bg-spinner" aria-hidden="true"></div>
-    <div class="vinyl-bg-spinner-2" aria-hidden="true"></div>
-    <div class="vinyl-bg-spinner-3" aria-hidden="true"></div>
-
-    <div class="splash-video-wrap" id="splash-video-wrap" role="button" tabindex="0"
-      aria-label="Play Poison Well Records intro">
-      <div class="splash-video-stage">
-        <video id="splash-video" class="splash-video" muted playsinline preload="auto" aria-hidden="true" autoplay
-          style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
-          <source src="assets/startofsite.mp4" type="video/mp4">
-        </video>
-        <div id="splash-logo-reveal" class="splash-logo-reveal" style="display:flex; align-items:center; justify-content:center; height:100%; position:relative; z-index:2;"></div>
-      </div>
-    </div>
-    <div class="splash-inner">
-      <h2 class="splash-title">Welcome. Where Punk Lives.</h2>
-      <p class="splash-sub">Poison Well Records</p>
-      <p class="enter-hint" id="enter-hint">Playing intro...</p>
-      <button type="button" id="skip-splash-btn" onclick="if(window.PW_dismissSplash) { window.PW_dismissSplash(); } else { document.getElementById('splash-gate').style.display='none'; document.body.classList.remove('gate-active'); }" style="padding: 10px 20px; background: transparent; color: white; border: 1px solid white; cursor: pointer; border-radius: 4px; margin-top: 15px; font-family: 'Courier New', monospace; text-transform: uppercase;">Skip Intro</button>
-      <script>
-        // Emergency Splash Dismiss Logic
-        document.getElementById('skip-splash-btn').addEventListener('click', function() {
-          var gate = document.getElementById('splash-gate');
-          if (gate) {
-            gate.style.opacity = '0';
-            setTimeout(function() { 
-              gate.style.display = 'none';
-              document.body.classList.remove('gate-active');
-            }, 500);
-          }
-        });
-      </script>
-    </div>
-  </div>
   <!-- HEADER / NAV -->
   <header class="site-header">
     <div class="container nav">
@@ -207,135 +171,7 @@
         <p class="home-intro-lead">Independent label and archive shop for 805 &amp; SoCal punk. Browse featured vinyl, <a href="rarities.html">rarities</a>, and the <a href="digital-music-hub.html">Digital Music Hub</a>.</p>
       </div>
     </section>
-    <!-- SHOP BY CATEGORY - FIRST SECTION -->
-    <section class="shop-categories" id="shop-categories">
-      <div class="container">
-        <h2>Shop by Category</h2>
-        <div class="category-grid">
-          <a href="ventura-punk-record-store-online.html#tab-vinyl" class="category-card">
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="22" />
-                <circle cx="32" cy="32" r="12" />
-                <circle cx="32" cy="32" r="3.5" fill="currentColor" stroke="none" />
-                <path d="M46 24a16 16 0 0 1 0 16" />
-              </svg>
-            </div>
-            <h3>Vinyl Records</h3>
-            <p>Press and core catalog releases from the 805 scene and beyond</p>
-          </a>
-          <a href="rarities.html" class="category-card">
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="22" />
-                <circle cx="32" cy="32" r="12" />
-                <path d="M32 18l4.5 9 10 .9-7.5 6.5 2.3 9.6L32 39l-9.3 5 2.3-9.6-7.5-6.5 10-.9z" fill="currentColor" stroke="none" />
-              </svg>
-            </div>
-            <h3>Rarities</h3>
-            <p>Rare drops, one-offs, and direct links to Press updates on archive releases</p>
-          </a>
 
-          <a href="digital-music-hub.html" class="category-card">
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="22" />
-                <circle cx="32" cy="32" r="12" />
-                <path d="M38 18v17.5a6 6 0 1 1-3-5.2V21l12-3v13.5a6 6 0 1 1-3-5.2V22z" fill="currentColor" stroke="none" />
-              </svg>
-            </div>
-            <h3>Digital Music Hub</h3>
-            <p>Streaming destination plus About context for featured artists and releases</p>
-          </a>
-          <a href="press.html" class="category-card">
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="22" />
-                <circle cx="32" cy="32" r="12" opacity="0.38" />
-                <path d="M25 20h14l5 5v19H25z" />
-                <path d="M39 20v6h6" />
-                <path d="M29 31h11M29 36h11M29 41h8" />
-              </svg>
-            </div>
-            <h3>Press</h3>
-            <p>Media validation, scene stories, and official release coverage</p>
-          </a>
-          <a href="about-poison-well-records.html" class="category-card">
-            <div class="category-icon" aria-hidden="true">
-              <svg viewBox="0 0 64 64">
-                <circle cx="32" cy="32" r="22" />
-                <circle cx="32" cy="32" r="12" opacity="0.38" />
-                <circle cx="32" cy="23" r="4.2" fill="currentColor" stroke="none" />
-                <path d="M22 42c2.6-6 6.9-9 10-9s7.4 3 10 9" />
-              </svg>
-            </div>
-            <h3>About</h3>
-            <p>Background on Poison Well Records, mission, and scene roots</p>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY POISON WELL IS THE BEST -->
-    <section class="why-best" id="why-best">
-      <div class="container">
-        <h2>Why Collectors and Locals Back Poison Well Records</h2>
-        <div class="why-grid">
-          <div class="why-card">
-            <div class="why-number">01</div>
-            <h3>Real Limited Pressings</h3>
-            <p>When we say limited, we mean it. Our vinyl runs are genuinely small batch — not manufactured
-              scarcity.
-              Once they're gone, they're gone forever. No represses, no second chances. That's how real collectors
-              know
-              we respect the game.</p>
-          </div>
-          <div class="why-card">
-            <div class="why-number">02</div>
-            <h3>805 Scene Authenticity</h3>
-            <p>We're not carpetbaggers. We're based in Ventura, breathing the same air as the bands we release. We
-              know
-              the venues, the basements, the back rooms where this music was born. Every release is a document of
-              real
-              California punk history.</p>
-          </div>
-          <div class="why-card">
-            <div class="why-number">03</div>
-            <h3>Archive Quality Restoration</h3>
-            <p>Our archival releases aren't just transferred — they're restored with care. Narthex Structure's
-              1984
-              recordings, Dr. Know's CBGB set, The Missing 23rd's classics — we treat these like the historical
-              documents they are.</p>
-          </div>
-          <div class="why-card">
-            <div class="why-number">04</div>
-            <h3>No Corporate BS</h3>
-            <p>Zero algorithms. Zero playlist optimization. Zero industry middlemen taking their cut. When you buy
-              from
-              Poison Well, your money goes to the artists and the label — not some streaming platform's
-              shareholders.
-            </p>
-          </div>
-          <div class="why-card">
-            <div class="why-number">05</div>
-            <h3>Worldwide Shipping</h3>
-            <p>From Ventura to Vienna, Tokyo to Toronto — we ship our vinyl everywhere punks live. Sturdy mailers,
-              proper packaging, and records that arrive in the condition they left. We've shipped to 30+ countries
-              and
-              counting.</p>
-          </div>
-          <div class="why-card">
-            <div class="why-number">06</div>
-            <h3>Community First</h3>
-            <p>We're not just a store — we're part of the 805 punk community. We sponsor shows, support local
-              venues,
-              and keep the scene alive. Every record you buy helps fund the next release, the next show, the next
-              piece
-              of history.</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- FEATURED RELEASES -->
     <section class="releases" id="releases">
@@ -522,6 +358,67 @@
               <a class="btn primary buy-btn" href="digital-music-hub.html#hub-all-a-blur">Digital hub</a>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY POISON WELL IS THE BEST -->
+    <section class="why-best" id="why-best">
+      <div class="container">
+        <h2>Why Collectors and Locals Back Poison Well Records</h2>
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-number">01</div>
+            <h3>Real Limited Pressings</h3>
+            <p>When we say limited, we mean it. Our vinyl runs are genuinely small batch — not manufactured
+              scarcity.
+              Once they're gone, they're gone forever. No represses, no second chances. That's how real collectors
+              know
+              we respect the game.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">02</div>
+            <h3>805 Scene Authenticity</h3>
+            <p>We're not carpetbaggers. We're based in Ventura, breathing the same air as the bands we release. We
+              know
+              the venues, the basements, the back rooms where this music was born. Every release is a document of
+              real
+              California punk history.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">03</div>
+            <h3>Archive Quality Restoration</h3>
+            <p>Our archival releases aren't just transferred — they're restored with care. Narthex Structure's
+              1984
+              recordings, Dr. Know's CBGB set, The Missing 23rd's classics — we treat these like the historical
+              documents they are.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">04</div>
+            <h3>No Corporate BS</h3>
+            <p>Zero algorithms. Zero playlist optimization. Zero industry middlemen taking their cut. When you buy
+              from
+              Poison Well, your money goes to the artists and the label — not some streaming platform's
+              shareholders.
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">05</div>
+            <h3>Worldwide Shipping</h3>
+            <p>From Ventura to Vienna, Tokyo to Toronto — we ship our vinyl everywhere punks live. Sturdy mailers,
+              proper packaging, and records that arrive in the condition they left. We've shipped to 30+ countries
+              and
+              counting.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-number">06</div>
+            <h3>Community First</h3>
+            <p>We're not just a store — we're part of the 805 punk community. We sponsor shows, support local
+              venues,
+              and keep the scene alive. Every record you buy helps fund the next release, the next show, the next
+              piece
+              of history.</p>
+          </div>
         </div>
       </div>
     </section>
